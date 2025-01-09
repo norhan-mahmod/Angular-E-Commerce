@@ -25,7 +25,7 @@
               </li>
               @for(page of pages ; track $index){
                 <li class="page-item"><a class="page-link cursor-pointer" [ngClass]="{
-                    'active-page' : page == currentPage
+                    'active-page page-item' : page == currentPage
                 }" (click)="getBrands(page)">{{page}}</a></li>
               }
               <li class="page-item" [ngClass]="{
