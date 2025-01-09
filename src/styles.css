@@ -23,6 +23,13 @@ body {
   color: var(--light-color) !important;
   border-radius: 5px;
 }
+.pagination .page-item{
+  --bs-pagination-color : var(--main-color);
+}
+.pagination .page-item.active-page{
+  --bs-pagination-bg : var(--main-color);
+  --bs-pagination-color : var(--light-color);
+}
 
 .rating-color {
   color: var(--rating-color);

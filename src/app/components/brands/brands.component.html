@@ -1,1 +1,40 @@
-<p>brands works!</p>
+<section class="my-3">
+    <div class="container">
+        <div class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-5">
+            @for(brand of brands ; track brand._id){
+                <div class="p-2 cursor-pointer">
+                    <div class="product p-2">
+                        <div class="brand-img">
+                            <img [src]="brand.image" class="w-100" [alt]="brand.slug">
+                        </div>
+                        <div class="brand-info text-center my-2">
+                            <h2 class="fs-5 text-main">{{brand.name}}</h2>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <!--Pagination-->
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-end">
+              <li class="page-item" [ngClass]="{
+                'disabled' : currentPage == 1 ,
+                'cursor-pointer' : currentPage != 1
+              }">
+                <a class="page-link" (click)="getBrands(currentPage - 1)">Previous</a>
+              </li>
+              @for(page of pages ; track $index){
+                <li class="page-item"><a class="page-link cursor-pointer" [ngClass]="{
+                    'active-page' : page == currentPage
+                }" (click)="getBrands(page)">{{page}}</a></li>
+              }
+              <li class="page-item" [ngClass]="{
+                'disabled' : currentPage == numberOfPages,
+                'cursor-pointer' : currentPage != numberOfPages
+              }">
+                <a class="page-link" (click)="getBrands(currentPage + 1 )">Next</a>
+              </li>
+            </ul>
+          </nav>
+    </div>
+</section>

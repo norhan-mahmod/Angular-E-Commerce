@@ -1,1 +1,66 @@
-<p>products works!</p>
+<section class="my-3">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="text-main bold">Our Products</h2>
+        </div>
+        <div class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-6">
+            @for(product of products ; track product.id){
+                <div class="p-2">
+                    <div class="product p-2">
+                        <div class="product-img">
+                            <img [src]="product.imageCover" class="w-100" [alt]="product.title">
+                        </div>
+                        <div class="product-cation">
+                            <h3 class="fs-6 text-main">{{product.category.name}}</h3>
+                            <h2 class="fs-6 bold">{{product.title.split(' ').slice(0,2).join(' ')}}</h2>
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <p>{{product.price}} EGP</p>
+                                </div>
+                                <div class="small">
+                                    <p>
+                                    @for(item of [1,2,3,4,5].slice(0 , product.ratingsAverage) ; track $index){
+                                        <i class="fa-solid fa-star rating-color"></i>
+                                    }
+                                    @if(product.ratingsAverage % 1 != 0){
+                                        <i class="fa-solid fa-star-half rating-color"></i>
+                                    }
+                                        {{product.ratingsAverage}}
+                                    </p>
+                                </div>
+                            </div>
+                            <div>
+                                <button class="btn-main w-100">Add to cart +</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <!--Pagination-->
+        <div class="my-2">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-end">
+                  <li class="page-item" [ngClass]="{
+                    'disabled' : currentPage == 1 ,
+                    'cursor-pointer' : currentPage != 1
+                  }">
+                    <a class="page-link" (click)="getProducts(currentPage - 1)">Previous</a>
+                  </li>
+                  @for(page of pages ; track $index){
+                    <li class="page-item cursor-pointer" [ngClass]="{
+                        'active-page' : page == currentPage
+                    }"><a class="page-link" (click)="getProducts(page)" >{{page}}</a></li>
+                  }
+                  
+                  <li class="page-item" [ngClass]="{
+                    'disabled' : currentPage == numberOfPages,
+                    'cursor-pointer' : currentPage != numberOfPages
+                  }">
+                    <a class="page-link" (click)="getProducts(currentPage + 1)" >Next</a>
+                  </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
