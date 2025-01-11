@@ -3,11 +3,13 @@ import { BrandsService } from '../../core/services/brands.service';
 import { Ibrand } from '../../core/interfaces/ibrand';
 import { NgClass } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { SearchPipe } from '../../core/pipes/search.pipe';
 
 @Component({
   selector: 'app-brands',
   standalone: true,
-  imports: [NgClass , RouterLink],
+  imports: [NgClass , RouterLink , FormsModule , SearchPipe],
   templateUrl: './brands.component.html',
   styleUrl: './brands.component.css'
 })
@@ -17,6 +19,7 @@ export class BrandsComponent implements OnInit{
   numberOfPages !: number;
   pages !: number[];
   currentPage : number = 1;
+  searchInputValue :string = '';
 
   ngOnInit(): void {
     this._BrandsService.getBrandsByPage(1).subscribe({

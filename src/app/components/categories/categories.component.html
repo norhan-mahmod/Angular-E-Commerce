@@ -1,7 +1,10 @@
 <section class="my-2">
     <div class="container">
+        <div class="my-2">
+            <input [(ngModel)]="searchInputValue" type="text" class="form-control w-50 mx-auto" placeholder="Search By Name">
+        </div>
         <div class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-5">
-            @for(category of categories ; track category._id){
+            @for(category of categories | search : "name" : searchInputValue ; track category._id){
                 <div class="p-2 cursor-pointer">
                     <div class="product p-2" [routerLink]="['/main/categoryDetails' , category._id]">
                         <div class="category-img">

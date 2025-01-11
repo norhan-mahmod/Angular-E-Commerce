@@ -19,7 +19,7 @@ export class ProductsComponent implements OnInit{
   pages !: number[];
   numberOfPages !: number;
   currentPage : number = 1;
-  searchInputValue : string = ' ';
+  searchInputValue : string = '';
 
   ngOnInit(): void {
     this._ProductsService.getProductsByPage(1).subscribe({

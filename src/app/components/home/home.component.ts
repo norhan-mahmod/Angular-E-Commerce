@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit , OnDestroy{
   productSub !: Subscription;
   categories !: Icategory[];
   categorySub !: Subscription;
-  searchInputValue = ' ';
+  searchInputValue :string = '';
 
   categoriesSlider: OwlOptions = {
     loop: true,
