@@ -3,35 +3,42 @@
         <div class="text-center">
             <h2 class="text-main bold">Our Products</h2>
         </div>
+        <div class="my-2">
+            <input [(ngModel)]="searchInputValue" type="text" class="form-control w-50 mx-auto" placeholder="Search By Title">
+        </div>
         <div class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-6">
-            @for(product of products ; track product.id){
+            @for(product of products | search : "title" : searchInputValue ; track product.id){
                 <div class="p-2">
                     <div class="product p-2">
-                        <div class="product-img">
-                            <img [src]="product.imageCover" class="w-100" [alt]="product.title">
+                        
+                        <div class="cursor-pointer" [routerLink]="['/main/productDetails' , product._id]">
+                            <div class="product-img">
+                                <img [src]="product.imageCover" class="w-100" [alt]="product.title">
+                            </div>
+                            <div class="product-caption">
+                                <h3 class="fs-6 text-main">{{product.category.name}}</h3>
+                                <h2 class="fs-6 bold">{{product.title.split(' ').slice(0,2).join(' ')}} </h2>
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <p>{{product.price | currency}} </p>
+                                    </div>
+                                    <div class="small">
+                                        <p>
+                                        @for(item of [1,2,3,4,5].slice(0 , product.ratingsAverage) ; track $index){
+                                            <i class="fa-solid fa-star rating-color"></i>
+                                        }
+                                        @if(product.ratingsAverage % 1 != 0){
+                                            <i class="fa-solid fa-star-half rating-color"></i>
+                                        }
+                                            {{product.ratingsAverage}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="product-cation">
-                            <h3 class="fs-6 text-main">{{product.category.name}}</h3>
-                            <h2 class="fs-6 bold">{{product.title.split(' ').slice(0,2).join(' ')}}</h2>
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <p>{{product.price}} EGP</p>
-                                </div>
-                                <div class="small">
-                                    <p>
-                                    @for(item of [1,2,3,4,5].slice(0 , product.ratingsAverage) ; track $index){
-                                        <i class="fa-solid fa-star rating-color"></i>
-                                    }
-                                    @if(product.ratingsAverage % 1 != 0){
-                                        <i class="fa-solid fa-star-half rating-color"></i>
-                                    }
-                                        {{product.ratingsAverage}}
-                                    </p>
-                                </div>
-                            </div>
-                            <div>
-                                <button class="btn-main w-100">Add to cart +</button>
-                            </div>
+                        
+                        <div>
+                            <button class="btn-main w-100">Add to cart +</button>
                         </div>
                     </div>
                 </div>

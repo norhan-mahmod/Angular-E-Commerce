@@ -15,4 +15,9 @@ export class CategoriesService {
   getAllCategories():Observable<any>{
     return this._HttpClient.get(`${environments.baseUrl}/api/v1/categories`);
   }
+
+  getCategoryDetails(id : string | null) : Observable<any>{
+    return this._HttpClient.get(`${environments.baseUrl}/api/v1/categories/${id}`);
+  }
+
 }

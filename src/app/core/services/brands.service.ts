@@ -13,4 +13,9 @@ export class BrandsService {
   getBrandsByPage(page : number):Observable<any>{
     return this._HttpClient.get(`${environments.baseUrl}/api/v1/brands`, {params : {limit : 10 , page : page}});
   }
+
+  getBrandDetails(id:string|null):Observable<any>{
+    return this._HttpClient.get(`${environments.baseUrl}/api/v1/brands/${id}`);
+  }
+
 }

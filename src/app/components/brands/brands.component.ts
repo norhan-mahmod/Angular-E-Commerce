@@ -2,11 +2,12 @@ import { Component, inject, OnInit } from '@angular/core';
 import { BrandsService } from '../../core/services/brands.service';
 import { Ibrand } from '../../core/interfaces/ibrand';
 import { NgClass } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-brands',
   standalone: true,
-  imports: [NgClass],
+  imports: [NgClass , RouterLink],
   templateUrl: './brands.component.html',
   styleUrl: './brands.component.css'
 })

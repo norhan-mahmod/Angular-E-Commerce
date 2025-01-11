@@ -1,0 +1,14 @@
+<section class="my-3">
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            @if(brandDetails){
+                <div class="col-12 col-md-3">
+                    <img [src]="brandDetails.image" class="w-100" [alt]="brandDetails.slug">
+                </div>
+                <div class="col-12 col-md-3">
+                    <h2 class="bold">{{brandDetails.name}}</h2>
+                </div>
+            }
+        </div>
+    </div>
+</section>

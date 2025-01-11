@@ -1,12 +1,15 @@
+import { RouterLink } from '@angular/router';
 import { Component, inject, OnInit } from '@angular/core';
 import { ProductsService } from '../../core/services/products.service';
 import { IProduct } from '../../core/interfaces/iproduct';
-import { NgClass } from '@angular/common';
+import { CurrencyPipe, NgClass } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { SearchPipe } from '../../core/pipes/search.pipe';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [NgClass],
+  imports: [NgClass , RouterLink , CurrencyPipe , FormsModule , SearchPipe],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
@@ -16,6 +19,7 @@ export class ProductsComponent implements OnInit{
   pages !: number[];
   numberOfPages !: number;
   currentPage : number = 1;
+  searchInputValue : string = ' ';
 
   ngOnInit(): void {
     this._ProductsService.getProductsByPage(1).subscribe({

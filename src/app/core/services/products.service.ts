@@ -17,4 +17,9 @@ export class ProductsService {
   getProductsByPage(page:number):Observable<any>{
     return this._HttpClient.get(`${environments.baseUrl}/api/v1/products`, {params : {limit : '12' , page : page}});
   }
+
+  getProductDetails(id : string| null):Observable<any>{
+    return this._HttpClient.get(`${environments.baseUrl}/api/v1/products/${id}`);
+  }
+
 }

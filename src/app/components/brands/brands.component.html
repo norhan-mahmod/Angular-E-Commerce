@@ -3,7 +3,7 @@
         <div class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-5">
             @for(brand of brands ; track brand._id){
                 <div class="p-2 cursor-pointer">
-                    <div class="product p-2">
+                    <div class="product p-2" [routerLink]="['/main/brandDetails' , brand._id]">
                         <div class="brand-img">
                             <img [src]="brand.image" class="w-100" [alt]="brand.slug">
                         </div>

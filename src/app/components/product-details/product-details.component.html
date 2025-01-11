@@ -1,0 +1,44 @@
+
+<section class="my-4">
+    <div class="container">
+        @if(productDetails){
+            <div class="row align-items-center">
+                <div class="col-12 col-md-3">
+                    <owl-carousel-o [options]="productImagesSlider">
+
+                        @for(image of productDetails.images ; track $index){
+                            <ng-template carouselSlide>
+                                <img [src]="image" class="w-100">
+                            </ng-template>
+                        }
+                    
+                      </owl-carousel-o>
+                </div>
+                <div class="col-12 col-md-9">
+                    <h3 class="my-2 fs-3"> {{productDetails.description}} </h3>
+                    <h2 class="fs-3 my-2 fw-bold"> {{productDetails.title}} </h2>
+                    <h2 class="my-2 text-main fs-3"> {{productDetails.category.name}} </h2>
+                    <div class="d-flex justify-content-between my-2">
+                        <div>
+                            <p> {{productDetails.price | currency}} </p>
+                        </div>
+                        <div>
+                            <p>
+                                @for(item of [1,2,3,4,5].slice(0 , productDetails.ratingsAverage) ; track $index){
+                                    <i class="fa-solid fa-star rating-color"></i>
+                                }
+                                @if(productDetails.ratingsAverage % 1 != 0){
+                                    <i class="fa-solid fa-star-half rating-color"></i>
+                                }
+                                {{productDetails.ratingsAverage}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-main w-50">Add to cart +</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>

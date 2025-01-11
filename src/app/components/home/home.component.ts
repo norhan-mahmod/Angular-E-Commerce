@@ -5,11 +5,15 @@ import { Subscription } from 'rxjs';
 import { Icategory } from '../../core/interfaces/icategory';
 import { CategoriesService } from '../../core/services/categories.service';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
+import { RouterLink } from '@angular/router';
+import { CurrencyPipe } from '@angular/common';
+import { SearchPipe } from '../../core/pipes/search.pipe';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CarouselModule],
+  imports: [CarouselModule , RouterLink , CurrencyPipe , SearchPipe , FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -19,7 +23,8 @@ export class HomeComponent implements OnInit , OnDestroy{
   productSub !: Subscription;
   categories !: Icategory[];
   categorySub !: Subscription;
-  
+  searchInputValue = ' ';
+
   categoriesSlider: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -75,7 +80,6 @@ export class HomeComponent implements OnInit , OnDestroy{
     this.categorySub = this._CategoriesService.getAllCategories().subscribe({
       next : (response) => {
         this.categories = response.data;
-        console.log(response.data);
       },
       error : (err) => {
         console.log(err);
