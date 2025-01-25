@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
@@ -10,8 +10,18 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class MainNavComponent {
   constructor(private _Router:Router){}
+  @ViewChild('nav') navbar !: ElementRef;
+
   logout():void{
     sessionStorage.removeItem('token');
     this._Router.navigate(['/auth/login']);
   }
+  
+  @HostListener('window:scroll') changeScroll():void{
+    if(scrollY > 100)
+      this.navbar.nativeElement.classList.add('p-3', 'fixed-top');
+    else
+      this.navbar.nativeElement.classList.remove('p-3', 'fixed-top');
+  }
+
 }
