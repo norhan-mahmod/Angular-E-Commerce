@@ -1,8 +1,5 @@
 <section class="bg-main-light shadow w-75 my-3 p-2 mx-auto">
     <h1 class="text-main">Login Now :</h1>
-    @if(responseMessage){
-        <p class="alert alert-danger p-2 my-2 w-50 mx-auto text-center">{{responseMessage}}</p>
-    }
     <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
         <div class="my-2">
             <label for="email">Email :</label>

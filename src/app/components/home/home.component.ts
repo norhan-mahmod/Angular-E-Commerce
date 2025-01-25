@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ProductsService } from '../../core/services/products.service';
 import { IProduct } from '../../core/interfaces/iproduct';
 import { Subscription } from 'rxjs';
@@ -9,6 +9,8 @@ import { RouterLink } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
 import { SearchPipe } from '../../core/pipes/search.pipe';
 import { FormsModule } from '@angular/forms';
+import { CartService } from '../../core/services/cart.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -64,8 +66,11 @@ export class HomeComponent implements OnInit , OnDestroy{
     items: 1,
     nav: false
   }
-
+  private readonly _CartService = inject(CartService);
+  private readonly _ToastrService = inject(ToastrService);
   constructor(private _ProductsService:ProductsService , private _CategoriesService:CategoriesService){}
+
+  addProductSub !: Subscription;
 
   ngOnInit(): void {
     this.productSub = this._ProductsService.getProducts().subscribe({
@@ -89,6 +94,17 @@ export class HomeComponent implements OnInit , OnDestroy{
   ngOnDestroy(): void {
     this.productSub?.unsubscribe();
     this.categorySub?.unsubscribe();
+  }
+
+  addProductToCart(id : string): void{
+    this.addProductSub = this._CartService.addProductToCart(id).subscribe({
+      next: (response) => {
+        this._ToastrService.success(response.message , response.status);
+      },
+      error : (err)=>{
+        this._ToastrService.error(err.message , "Error");
+      }
+    })
   }
 
 }

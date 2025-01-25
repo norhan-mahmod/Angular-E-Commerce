@@ -1,1 +1,40 @@
-<p>cart works!</p>
+<section class="my-3">
+    <div class="container bg-main-light p-3">
+        <div class="d-flex justify-content-between">
+            <h1>Shop Cart : </h1>
+            @if(cartData.products.length){
+                <button class="btn-main" (click)="clearCart()">Clear Cart</button>
+            }
+        </div>
+        <h4 class="text-main">Total Cart Price : {{cartData.totalCartPrice | currency}} </h4>
+        @for(product of cartData.products ; track product.product._id){
+            <div class="row align-items-center">
+                <div class="col-2">
+                    <div class="p-3">
+                        <img [src]="product.product.imageCover" class="w-100" [alt]="product.product.title">
+                    </div>
+                </div> 
+                <div class="col-7">
+                    <h3>{{product.product.title}}</h3>
+                    <h5 class="text-main my-3">Price : {{product.price | currency}} </h5>
+                    <h5 class="cursor-pointer d-inline" (click)="deleteProduct(product.product._id)">
+                         <i class="fa-solid fa-trash fa-shake text-main"></i> Remove
+                    </h5>
+                </div>
+                <div class="col-3">
+                    <div class="d-flex align-items-center">
+                        <div class="mx-3 p-2 border border-2 rounded-2 border-main cursor-pointer" (click)="updateProductQuantity(product.product._id , product.count+1)">
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+                         <h4> {{product.count}} </h4>
+                        @if(product.count > 1){
+                            <div class="mx-3 p-2 border border-2 rounded-2 border-main cursor-pointer" (click)="updateProductQuantity(product.product._id , product.count-1)">
+                                <i class="fa-solid fa-minus"></i>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
