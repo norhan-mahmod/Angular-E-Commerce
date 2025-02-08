@@ -1,9 +1,12 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IProduct } from '../../core/interfaces/iproduct';
 import { ProductsService } from '../../core/services/products.service';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { CurrencyPipe } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
+import { CartService } from '../../core/services/cart.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-product-details',
@@ -12,11 +15,15 @@ import { CurrencyPipe } from '@angular/common';
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css'
 })
-export class ProductDetailsComponent implements OnInit{
+export class ProductDetailsComponent implements OnInit , OnDestroy{
   private readonly _ProductsService = inject(ProductsService);
   constructor(private _ActivatedRoute : ActivatedRoute){}
   productId !: string| null;
   productDetails : IProduct | null = null;
+  getProductDetailsSub !: Subscription;
+  private readonly _ToastrService = inject(ToastrService);
+  private readonly _CartService = inject(CartService);
+  addProductToCartSub !: Subscription;
 
   productImagesSlider: OwlOptions = {
     loop: true,
@@ -40,12 +47,28 @@ export class ProductDetailsComponent implements OnInit{
       }
     });
 
-    this._ProductsService.getProductDetails(this.productId).subscribe({
+    this.getProductDetailsSub = this._ProductsService.getProductDetails(this.productId).subscribe({
       next : (response) => {
         this.productDetails = response.data;
       }
     })
 
+  }
+
+  addProductToCart(id:string):void{
+    this.addProductToCartSub = this._CartService.addProductToCart(id).subscribe({
+      next : (response) => {
+        this._ToastrService.success(response.message , response.status);
+        this._CartService.cartCount.next(response.numOfCartItems);
+      },
+      error : (err) => {
+        this._ToastrService.error(err);
+      }
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.getProductDetailsSub?.unsubscribe();
   }
 
 }

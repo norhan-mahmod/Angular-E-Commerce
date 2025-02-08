@@ -26,6 +26,7 @@ export class CartComponent implements OnInit , OnDestroy{
     this.cartSub = this._CartService.getCart().subscribe({
       next : (response) =>{
         this.cartData = response.data;
+        this._CartService.cartCount.next(response.numOfCartItems);
       },
       error : (err) => {
         console.log(err);
@@ -46,6 +47,7 @@ export class CartComponent implements OnInit , OnDestroy{
       next : (response) =>{
         this.cartData = response.data;
         this._ToastrService.success("Product Removed successfully From Your Cart","Cart");
+        this._CartService.cartCount.next(response.numOfCartItems);
       },
       error: (err)=> {
         this._ToastrService.success(err);
@@ -58,6 +60,7 @@ export class CartComponent implements OnInit , OnDestroy{
       next : (response) => {
         this.cartData = response.data;
         this._ToastrService.success("Product Quantity Updated Successfully" , "Product Quantity");
+        this._CartService.cartCount.next(response.numOfCartItems);
       },
       error : (err) => {
         this._ToastrService.error(err.message , "Cart");
@@ -71,6 +74,7 @@ export class CartComponent implements OnInit , OnDestroy{
         this.getCartSub = this._CartService.getCart().subscribe({
           next : (response) => {
             this.cartData = response.data;
+            this._CartService.cartCount.next(response.numOfCartItems);
           },
           error : (err) =>{
             console.log(err);

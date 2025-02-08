@@ -2,7 +2,7 @@
     <div class="container bg-main-light p-3">
         <div class="d-flex justify-content-between">
             <h1>Shop Cart : </h1>
-            @if(cartData.products.length){
+            @if(cartData.products && cartData.products.length){
                 <button class="btn-main" (click)="clearCart()">Clear Cart</button>
             }
         </div>

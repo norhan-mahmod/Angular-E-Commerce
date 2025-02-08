@@ -22,8 +22,10 @@
             </li>
           </ul>
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item" routerLink="/main/cart">
-              <a class="nav-link cursor-pointer"><i class="fa-solid fa-cart-shopping"></i></a>
+            <li class="nav-item position-relative" routerLink="/main/cart">
+              <a class="nav-link cursor-pointer">
+                <i class="fa-solid fa-cart-shopping fs-3"></i><span class="badge bg-main position-absolute end-0 top-0">{{cartCount}}</span>
+              </a>
             </li>
             <li class="nav-item">
               <a class="nav-link cursor-pointer"><i class="fa-brands fa-facebook"></i></a>

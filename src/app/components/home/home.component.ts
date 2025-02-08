@@ -100,6 +100,7 @@ export class HomeComponent implements OnInit , OnDestroy{
     this.addProductSub = this._CartService.addProductToCart(id).subscribe({
       next: (response) => {
         this._ToastrService.success(response.message , response.status);
+        this._CartService.cartCount.next(response.numOfCartItems);
       },
       error : (err)=>{
         this._ToastrService.error(err.message , "Error");
