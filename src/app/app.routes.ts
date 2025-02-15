@@ -13,6 +13,8 @@ import { authGuard } from './core/guards/auth.guard';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { CategoryDetailsComponent } from './components/category-details/category-details.component';
 import { BrandDetailsComponent } from './components/brand-details/brand-details.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { AllordersComponent } from './components/allorders/allorders.component';
 
 export const routes: Routes = [
     {path:'' , redirectTo:'auth', pathMatch:'full'},
@@ -30,7 +32,10 @@ export const routes: Routes = [
         {path:'brands' , component:BrandsComponent, title:'Brands'},
         {path : 'productDetails/:productId' , component : ProductDetailsComponent , title : 'Product Details'},
         {path : 'categoryDetails/:categoryId' , component : CategoryDetailsComponent , title : 'Category Details'},
-        {path : 'brandDetails/:brandId' , component : BrandDetailsComponent , title : 'Brand Details'}
+        {path : 'brandDetails/:brandId' , component : BrandDetailsComponent , title : 'Brand Details'},
+        {path : 'checkout/:cartId' , component : CheckoutComponent , title : 'Check-Out'},
+        {path: 'allorders' , component: AllordersComponent , title : 'All Orders'}
     ]},
+    {path: 'allorders', redirectTo : 'main/allorders' , pathMatch : 'full'},
     {path:'**',component:NotFoundComponent , title:'Error 404'}
 ];

@@ -1,0 +1,31 @@
+<section class="container my-4">
+    <div class="bg-main-light p-3 rounded rounded-2 shadow">
+        <h1 class="text-main fw-bold">Shipping Address</h1>
+        <form [formGroup]="shippingAddress" (ngSubmit)="payOrder()">
+            <div class="my-3 px-3">
+                <label for="details"><span class="text-danger">*</span>Details</label>
+                <textarea formControlName="details" name="details" id="details" class="form-control"></textarea>
+                @if(shippingAddress.get('details')?.getError('required') && shippingAddress.get('details')?.touched){
+                    <p class="alert alert-danger my-2 p-2">Details is required</p>
+                }
+            </div>
+            <div class="my-3 px-3">
+                <label for="phone"><span class="text-danger">*</span>Phone</label>
+                <input formControlName="phone" type="tel" id="phone" class="form-control">
+                @if(shippingAddress.get('phone')?.getError('required') && shippingAddress.get('phone')?.touched){
+                    <p class="alert alert-danger my-2 p-2">Phone is required</p>
+                }
+            </div>
+            <div class="my-3 px-3">
+                <label for="city"><span class="text-danger">*</span>City</label>
+                <input formControlName="city" type="text" id="city" class="form-control">
+                @if(shippingAddress.get('city')?.getError('required') && shippingAddress.get('city')?.touched){
+                    <p class="alert alert-danger my-2 p-2">City is required</p>
+                }
+            </div>
+            <div class="text-center my-3">
+                <button class="btn-main" [disabled]="shippingAddress.invalid">Payment</button>
+            </div>
+        </form>
+    </div>
+</section>

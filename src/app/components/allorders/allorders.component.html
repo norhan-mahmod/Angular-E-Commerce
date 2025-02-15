@@ -1,0 +1,34 @@
+<section class="container my-3 bg-main-light rounded rounded-3 p-3 shadow">
+    @for(order of orders ; track order._id){
+        <div class="row my-3 p-3 align-items-center">
+            <div class="col-5">
+                <h3 class="text-main">Order Items :</h3>
+                @for(item of order.cartItems ; track item._id){
+                    <div class="row px-3">
+                        <div class="col-2">
+                            <img [src]="item.product.imageCover" class="w-100" [alt]="item.product.title">
+                        </div>
+                        <div class="col-7">
+                            <h4> {{item.product.title.split(' ').slice(0 , 2).join(' ')}} </h4>
+                        </div>
+                        <div class="col-3">
+                            <h6> Price: {{item.price | currency }} </h6>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="col-2">
+                @if(order.isDelivered){<h5 class="text-success"> Delivered </h5>}
+                @else {<h5 class="text-danger"> Not Delivered Yet </h5>}
+            </div>
+            <div class="col-2">
+                @if(order.isPaid){ <h6 class="text-success"> Paid At : {{order.paidAt | date}} </h6>}
+                @else{ <h5 class="text-danger"> Not Paid </h5>}
+            </div>
+            <div class="col-3">
+                <h5 class="text-main"> Total Price : {{order.totalOrderPrice | currency}} </h5>
+            </div>
+        </div>
+        <hr>
+    }
+</section>
