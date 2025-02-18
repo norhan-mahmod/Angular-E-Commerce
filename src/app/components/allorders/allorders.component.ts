@@ -35,7 +35,7 @@ export class AllordersComponent implements OnInit,OnDestroy{
 
 
   ngOnDestroy(): void {
-    this.getOrdersSub.unsubscribe();
+    this.getOrdersSub?.unsubscribe();
   }
   
 }
