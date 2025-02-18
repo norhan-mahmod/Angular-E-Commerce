@@ -1,8 +1,5 @@
 <section class="bg-main-light p-2 w-75 mx-auto shadow my-3">
     <h1 class="text-main">Register Now :</h1>
-    @if(responseMessage){
-        <p class="alert alert-danger p-2 my-2 w-50 text-center mx-auto">{{responseMessage}}</p>
-    }
     <form [formGroup]="registerForm"  (ngSubmit)="registerUser()">
         <div class="my-2">
             <label class="mb-2" for="name"><span class="text-danger">*</span>Name</label>
