@@ -36,9 +36,6 @@ export class CheckoutComponent implements OnInit , OnDestroy{
       this.payOrderSub = this._PaymentService.checkoutSession(this.cartId ! , this.shippingAddress.value).subscribe({
         next : (response) =>{
           window.open(response.session.url , '_self');
-        },
-        error : (err) => {
-          console.log(err);
         }
       })
     }

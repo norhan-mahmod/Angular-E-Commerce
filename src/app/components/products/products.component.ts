@@ -35,9 +35,6 @@ export class ProductsComponent implements OnInit , OnDestroy{
         this.products = response.data;
         this.numberOfPages = response.metadata.numberOfPages;
         this.pages = Array.from({length : this.numberOfPages} , (_ , i) => i+1);
-      },
-      error : (err) => {
-        console.log(err.error);
       }
     })
   }
@@ -46,9 +43,6 @@ export class ProductsComponent implements OnInit , OnDestroy{
       next : (response) => {
         this.products = response.data;
         this.currentPage = response.metadata.currentPage;
-      },
-      error : (err) => {
-        console.log(err);
       }
     })
   }
@@ -58,9 +52,6 @@ export class ProductsComponent implements OnInit , OnDestroy{
       next : (response) => {
         this._ToastrService.success(response.message , response.status);
         this._CartService.cartCount.next(response.numOfCartItems);
-      },
-      error : (err) => {
-        this._ToastrService.error(err.message);
       }
     });
   }

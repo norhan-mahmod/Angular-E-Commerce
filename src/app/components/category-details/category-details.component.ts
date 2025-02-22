@@ -26,9 +26,6 @@ export class CategoryDetailsComponent implements OnInit{
     this._CategoriesService.getCategoryDetails(this.categoryId).subscribe({
       next : (response) => {
         this.categoryDetails = response.data;
-      },
-      error : (err) => {
-        console.log(err);
       }
     })
   }

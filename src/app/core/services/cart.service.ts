@@ -9,27 +9,26 @@ import { environments } from '../environments/environments';
 export class CartService {
   private readonly _HttpClient = inject(HttpClient)
   constructor() { }
-  header : any = {token : sessionStorage.getItem("token")}
   cartCount : BehaviorSubject<number> = new BehaviorSubject(0);
 
   getCart():Observable<any>{
-    return this._HttpClient.get(`${environments.baseUrl}/api/v1/cart`,{ headers : this.header});
+    return this._HttpClient.get(`${environments.baseUrl}/api/v1/cart`);
   }
 
   addProductToCart(productId:string):Observable<any>{
-    return this._HttpClient.post(`${environments.baseUrl}/api/v1/cart`, {productId : productId} , {headers : this.header});
+    return this._HttpClient.post(`${environments.baseUrl}/api/v1/cart`, {productId : productId} );
   }
 
   removeProduct(productId : string):Observable<any>{
-    return this._HttpClient.delete(`${environments.baseUrl}/api/v1/cart/${productId}`,{headers : this.header});
+    return this._HttpClient.delete(`${environments.baseUrl}/api/v1/cart/${productId}`);
   }
 
   updateCartProductQuantity(productId :string , count : number) : Observable<any>{
-    return this._HttpClient.put(`${environments.baseUrl}/api/v1/cart/${productId}`, {count : count} , {headers : this.header});
+    return this._HttpClient.put(`${environments.baseUrl}/api/v1/cart/${productId}`, {count : count} );
   }
 
   clearCart():Observable<any>{
-    return this._HttpClient.delete(`${environments.baseUrl}/api/v1/cart`, {headers : this.header});
+    return this._HttpClient.delete(`${environments.baseUrl}/api/v1/cart`);
   }
 
 }

@@ -60,9 +60,6 @@ export class ProductDetailsComponent implements OnInit , OnDestroy{
       next : (response) => {
         this._ToastrService.success(response.message , response.status);
         this._CartService.cartCount.next(response.numOfCartItems);
-      },
-      error : (err) => {
-        this._ToastrService.error(err);
       }
     })
   }

@@ -76,18 +76,12 @@ export class HomeComponent implements OnInit , OnDestroy{
     this.productSub = this._ProductsService.getProducts().subscribe({
       next : (response) => {
         this.products = response.data.slice(0,20);
-      },
-      error : (err) => {
-        console.log(err);
       }
     });
     
     this.categorySub = this._CategoriesService.getAllCategories().subscribe({
       next : (response) => {
         this.categories = response.data;
-      },
-      error : (err) => {
-        console.log(err);
       }
     })
   }
@@ -101,9 +95,6 @@ export class HomeComponent implements OnInit , OnDestroy{
       next: (response) => {
         this._ToastrService.success(response.message , response.status);
         this._CartService.cartCount.next(response.numOfCartItems);
-      },
-      error : (err)=>{
-        this._ToastrService.error(err.message , "Error");
       }
     })
   }

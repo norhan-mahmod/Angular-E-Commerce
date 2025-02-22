@@ -11,12 +11,10 @@ export class PaymentService {
   constructor() { }
 
   private _HttpClient = inject(HttpClient);
-  userToken : any = {token : sessionStorage.getItem('token')};
 
   checkoutSession(cartId : string , shippingAddress : object):Observable<any>{
     return this._HttpClient.post(`${environments.baseUrl}/api/v1/orders/checkout-session/${cartId}?url=${environments.url}` , 
-      {shippingAddress : shippingAddress},
-      {headers : this.userToken}
+      {shippingAddress : shippingAddress}
     );
   }
 

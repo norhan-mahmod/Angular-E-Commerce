@@ -26,9 +26,6 @@ export class BrandDetailsComponent implements OnInit{
     this._BrandsService.getBrandDetails(this.brandId).subscribe({
       next : (response) => {
         this.brandDetails = response.data;
-      },
-      error : (err) => {
-        console.log(err);
       }
     });
     

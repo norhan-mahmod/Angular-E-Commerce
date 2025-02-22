@@ -28,9 +28,6 @@ export class CartComponent implements OnInit , OnDestroy{
       next : (response) =>{
         this.cartData = response.data;
         this._CartService.cartCount.next(response.numOfCartItems);
-      },
-      error : (err) => {
-        console.log(err);
       }
     })
   }
@@ -49,9 +46,6 @@ export class CartComponent implements OnInit , OnDestroy{
         this.cartData = response.data;
         this._ToastrService.success("Product Removed successfully From Your Cart","Cart");
         this._CartService.cartCount.next(response.numOfCartItems);
-      },
-      error: (err)=> {
-        this._ToastrService.success(err);
       }
     });
   }
@@ -82,10 +76,6 @@ export class CartComponent implements OnInit , OnDestroy{
           }
         });
         this._ToastrService.success("Cart Cleared Successfully");
-      },
-      error : (err) => {
-        console.log(err);
-        this._ToastrService.error(err);
       }
     });
   }

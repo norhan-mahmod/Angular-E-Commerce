@@ -27,9 +27,6 @@ export class BrandsComponent implements OnInit{
         this.brands = response.data;
         this.numberOfPages = response.metadata.numberOfPages;
         this.pages = Array.from({length : this.numberOfPages} , (_ , i) =>  i + 1 );
-      },
-      error : (err) => {
-        console.log(err);
       }
     })
   }
@@ -39,9 +36,6 @@ export class BrandsComponent implements OnInit{
       next : (response) => {
         this.brands = response.data;
         this.currentPage = response.metadata.currentPage;
-      },
-      error : (err) => {
-        console.log(err);
       }
     })
   }

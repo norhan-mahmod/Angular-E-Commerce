@@ -35,9 +35,6 @@ export class MainNavComponent implements OnInit , OnDestroy {
     this._CartService.getCart().subscribe({
       next : (response) => {
         this.cartCount = response.numOfCartItems;
-      },
-      error : (err) => {
-        this._ToastrService.error(err);
       }
     });
 

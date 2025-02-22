@@ -23,14 +23,16 @@ export class AllordersComponent implements OnInit,OnDestroy{
   ngOnInit(): void {
     this._AuthService.DecodeToken();
 
-    this.getOrdersSub = this._PaymentService.getUserOrders(this._AuthService.DecodedToken.id).subscribe({
-      next : (response) => {
-        this.orders = response;
-      },
-      error : (err) => {
-        this._ToastrService.error(err , "Orders Error");
-      }
-    });
+    if(this._AuthService.DecodedToken){
+      this.getOrdersSub = this._PaymentService.getUserOrders(this._AuthService.DecodedToken.id).subscribe({
+        next : (response) => {
+          this.orders = response;
+        },
+        error : (err) => {
+          this._ToastrService.error(err , "Orders Error");
+        }
+      });
+    }
   }
 
 
