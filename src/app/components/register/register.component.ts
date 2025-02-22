@@ -38,10 +38,6 @@ export class RegisterComponent implements OnDestroy{
             this._Router.navigate(['/auth/login']);
           }, 2000);
         },
-        error : (response) => {
-          this._ToastrService.error(response.error.message , "Register Error");
-          this.loading = false;
-        },
         complete : () => {console.log("Complete Method")}
       });
     }
