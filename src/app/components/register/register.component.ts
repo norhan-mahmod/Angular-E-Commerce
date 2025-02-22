@@ -38,6 +38,7 @@ export class RegisterComponent implements OnDestroy{
             this._Router.navigate(['/auth/login']);
           }, 2000);
         },
+        error : () => {this.loading = false;},
         complete : () => {console.log("Complete Method")}
       });
     }
